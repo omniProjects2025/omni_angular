@@ -1,0 +1,223 @@
+<!-- Top Header -->
+<!-- Pre-header -->
+<div
+  class="pre-header px-3 d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center">
+  <!-- Brand -->
+  <div class="d-flex align-items-center mb-md-0">
+    <img src="assets/images/logo.png" alt="OMNI" class="p-3" />
+  </div>
+
+  <!-- Info Items (Desktop) -->
+  <div class="d-none d-md-flex gap-4 align-items-center ms-auto position-relative" style="margin-right: 7%;">
+    <div *ngFor="let item of infoItems" class="d-flex align-items-center gap-2">
+      <img [src]="item.icon" alt="icon" class="icon" />
+
+      <ng-container *ngIf="item.route; else desktopText">
+        <a [routerLink]="item.route" routerLinkActive="active-info-link" class="text-decoration-none text-dark">
+          <div>{{ item.title }}</div>
+        </a>
+      </ng-container>
+
+      <ng-template #desktopText>
+        <div class="text_dark">
+          <div class="">{{ item.title }}</div>
+          <!-- <small *ngIf="item.subtitle">{{ item.subtitle }}</small> -->
+        </div>
+      </ng-template>
+    </div>
+
+    <!-- Border line only -->
+    <div style="
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 1180px;
+      border-bottom: 1px solid #666666;
+      bottom: -8px;
+    "></div>
+  </div>
+
+
+
+  <!-- Info Grid (Mobile only) -->
+  <div class="d-md-none w-100">
+    <div class="mobile-info-grid">
+      <div *ngFor="let item of infoItems" class="info-box">
+        <img [src]="item.icon" alt="icon" class="icon" />
+        <ng-container *ngIf="item.route; else mobileText">
+          <a [routerLink]="item.route" routerLinkActive="active-info-link"
+            class="text-decoration-none text_dark small-text" style="white-space: nowrap;">
+            {{ item.title }}
+          </a>
+        </ng-container>
+        <ng-template #mobileText>
+          <div class="small-text" style="white-space: nowrap;">{{ item.title }}</div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white px-3 py-2" style=" box-shadow: 0px 4px 4px 0px #00000040;
+">
+  <div class="container px-0">
+    <!-- Home and Menu -->
+    <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse pb-3" id="mainNavbar">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item" *ngFor="let item of navItems" [class.dropdown]="item.children"
+          [class.show]="hoveredItem === item.key" (mouseenter)="hoveredItem = item.key"
+          (mouseleave)="hoveredItem = null">
+          <!-- Routing item -->
+          <a *ngIf="item.route" class="nav-link" [routerLink]="item.route" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"  (click)="setActive(item.key)">
+            <ng-container *ngIf="item.key === 'home'">
+              <img src="assets/icons/home_page_btn.svg" class="me-1" alt="" width="25px" height="25px" />
+            </ng-container>
+            {{ item.label }}
+          </a>
+          <a *ngIf="!item.route && item.modalTarget" class="nav-link" [attr.data-bs-toggle]="'modal'"
+            [attr.data-bs-target]="item.modalTarget" [ngClass]="{ 'active': activeTab === item.key }"
+            (click)="setActive(item.key)">
+            {{ item.label }}
+          </a>
+
+          <!-- Modal item -->
+          <!-- <a *ngIf="item.modalTarget" class="nav-link" href="javascript:void(0)" [attr.data-bs-toggle]="'modal'"
+            [attr.data-bs-target]="item.modalTarget" [ngClass]="{ 'active': isModalRouteActive('/our-branches') }"
+            (click)="setActive(item.key)">
+            {{ item.label }}
+          </a> -->
+          <!-- Submenu -->
+          <ul class="dropdown-menu show " *ngIf="item.children && hoveredItem === item.key">
+            <li *ngFor="let child of item.children">
+              <a class="dropdown-item"
+                (click)="onChildClick(item.key, child.id,child.img)">
+                {{ child.label }}
+              </a>
+            </li>
+          </ul>
+
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+
+<!-- Our Branches modal -->
+<ng-container>
+  <div class="modal fade" id="branchesModal" tabindex="-1" aria-labelledby="branchesModalLabel" aria-hidden="true"
+    data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="row pt-4">
+          <div class="col-md-11 col-11 col-sm-10 col-xs-10 d-flex align-items-center justify-content-center">
+            <div class="line line-left ms-5"></div>
+            <div class="">
+              <span class="title_text text-center px-2">Our Branches</span>
+            </div>
+            <div class="line line-right"></div>
+          </div>
+          <div class="col-md-1 col-1 d-flex col-sm-2 col-xs-2 align-items-center justify-content-start p-0 m-0">
+            <button class="" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <div class="row g-3">
+              <div class="col-6 col-md-4" *ngFor="let details of locations_details; index as l">
+                <div class="text-center" (click)="routeToLocation(details['location_name'], details['img'])">
+                  <img src="assets/locations/{{details['img']}}" alt="Kothapet">
+                  <p class="border_prop py-2">{{details['location_name']}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<!-- Our Branches modal -->
+
+<ng-container>
+
+  <div class="modal fade custom-modal" id="bookanappointment" tabindex="-1" aria-hidden="true"
+    data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="modal-title-container">
+            <div class="line line-left"></div>
+            <span class="px-2 book_text">BOOK AN APPOINTMENT</span>
+            <div class="line line-right"></div>
+          </div>
+          <button type="button" class="btn-close btn_close" data-bs-dismiss="modal"></button>
+        </div>
+
+
+        <div class="form-container rounded">
+          <form>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="fullName" placeholder=" " required>
+              <label for="fullName" class="ps-0">Full Name</label>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="tel" class="form-control" id="phoneNumber" placeholder=" " required>
+              <label for="phoneNumber" class="ps-0">Phone Number</label>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="email" class="form-control" id="email" placeholder=" " required>
+              <label for="email" class="ps-0">Email ID</label>
+            </div>
+
+            <div class="mb-3 select-container">
+              <select class="form-control ps-0" id="location" (click)="locationToggle(1)">
+                <option value="" disabled selected>Location</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Bangalore">Bangalore</option>
+                <option value="Mumbai">Mumbai</option>
+              </select>
+              <img src="assets/images/{{direction_icon?'down_icon.svg':'up_icon.svg'}}" class="select-icon"
+                id="location-icon">
+            </div>
+
+            <div class="mb-3 select-container">
+              <select class="form-control ps-0" id="department" (click)="locationToggle(2)">
+                <option value="" disabled selected>Department</option>
+                <option value="Cardiology">Cardiology</option>
+                <option value="Neurology">Neurology</option>
+                <option value="Orthopedics">Orthopedics</option>
+              </select>
+              <img src="assets/images/{{depertment_icon?'down_icon.svg':'up_icon.svg'}}" class="select-icon"
+                id="location-icon">
+            </div>
+          </form>
+        </div>
+        <button type="submit" class="btn btn-outline-dark submit-btn">Submit</button>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<!---------- Side Fixed Buttons ------------>
+<div class="fixed_buttons">
+  <div class="side_button bg_green" (click)="goToBookAnAppointment()">
+    <img src="assets/images/book_an_appointment.png" alt="appointment icon" />
+    <span class="fw-medium" style="font-size:10px">BOOK AN <br> APPOINTMENT</span>
+  </div>
+  <div class="side_button bg_blue">
+    <img src="assets/images/call_icon.png" alt="call icon" />
+    <span class="fw-medium" style="font-size:10px">CALL FOR <br> ENQUIRY</span>
+  </div>
+</div>
