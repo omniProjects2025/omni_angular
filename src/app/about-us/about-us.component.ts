@@ -155,7 +155,7 @@ export class AboutUsComponent {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  goBack() {
+  resetSelectedTeam() {
     this.selected_team = 1
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
