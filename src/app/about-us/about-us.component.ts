@@ -20,67 +20,6 @@ export class AboutUsComponent {
       id: 2, title: 'About Chairman',
     }
   ]
-
-  // activeSection = 'aboutOmni';
-  // showModal = false;
-  // selectedLeader: any = null;
-  // sections = [
-  //   { id: 'aboutOmni', name: 'About OMNI Hospitals' },
-  //   { id: 'ourChairman', name: 'Our Chairman' },
-  //   { id: 'boardMembers', name: 'Board Members' },
-  //   { id: 'leadershipTeam', name: 'Leadership Team' },
-  // ];
-
-  // boardMembers = [
-  //   { name: 'Dr M Goutham Reddy', image: 'assets/about_us/dr_goutham_reddy.jpg', label: 'Medical Director' },
-  //   { name: 'Dr E Venkat Ramana Reddy', image: 'assets/about_us/dr_venkat_ramana_reddy.jpg', label: 'Medical Director' },
-  //   { name: 'Dr Y Sandeep Reddy', image: 'assets/about_us/dr.y.sandeep_reddy.jpg', label: 'Medical Director' },
-  //   { name: 'Dr Radha Krishna', image: 'assets/about_us/dr_radha_krishna.jpg', label: 'Medical Director' },
-  //   { name: 'Dr Ved Prakash', image: 'assets/about_us/dr_ved_prakash.jpg', label: 'Medical Director' },
-  //   { name: 'Dr Raghava Dutt M', image: 'assets/about_us/dr_raghava_dutt_mulukutla.jpg', label: 'Medical Director' },
-  //   { name: 'Dr Udai Prakash', image: 'assets/about_us/dr_udai_prakash.jpg', label: 'Medical Director' }
-  // ];
-
-  // leadershipTeam = [
-  //   { name: 'Dr. Durgesh Shiva', title: 'Group Chief Executive Officer', image: 'assets/about_us/our_ceo_message.svg', description:'Dr. Durgesh Shiva is a seasoned healthcare professional with over 20 years of vast experience in spanning operations, strategic planning, and business growth in leading healthcare institutions. His expertise in profit and loss management, consultant recruitment and operational excellence has positioned him as a trusted leader in the healthcare sector, dedicated to improving patient outcomes and expanding access to quality care.' },
-  //   { name: 'Dr. Aloke Chandra Mullick', title: 'Group Chief Growth Officer', image: 'assets/about_us/dr.aloke_mullick.jpg', description:'Dr. Aloke Chandra is a seasoned healthcare leader with global experience, Dr. Aloke Mullick drives strategic growth and transformation at Omni Hospitals. Passionate about healthcare technology, he founded India’s first standalone EHR company and advises several HealthTech firms. A frequent international speaker and certified Heartfulness Meditation Trainer, he brings clarity, purpose, and innovation to everything he does.' },
-  //   { name: 'Ankit Shah', title: 'Group Chief Financial Officer', image: 'assets/about_us/ankit_group_cfo.jpg', description:'Mr.Shah is an accomplished finance and strategy leader with over 20 years of experience across healthcare, life sciences, biotech, and infrastructure. His expertise includes risk management, investment planning, and strategic business development. He has held leadership roles at Alexandria Real Estate Equities Inc. and Ernst & Young. A Chartered Accountant (ICAI), Mr. Shah leads Omni’s financial strategy and governance.' }
-  // ];
-  // constructor(private route: ActivatedRoute,private router: Router) {
-
-  // }
-  // ngOnInit() {
-  //   this.route.queryParams.subscribe((res) => {
-  //      const sectionId = res['id'];
-  //       if (sectionId) {
-  //         this.activeSection = sectionId;
-  //       }
-  //   })
-  // }
-  // setActiveSection(sectionId: string) {
-  //   this.activeSection = sectionId;
-  // }
-
-  // goToDetails() {
-  //   this.router.navigate(['/board-members'], {
-  //     queryParams: {
-  //     }
-  //   });
-  // }
-
-  // openProfileModal(leader: any) {
-  //   this.selectedLeader = leader;
-  //   this.showModal = true;
-  //   document.body.classList.add('modal-open');
-  // }
-
-  // closeModal() {
-  //   console.log('fuction calling..');
-
-  //   this.showModal = false;
-  //   this.selectedLeader = null;
-  //   document.body.classList.remove('modal-open');
-  // }
   boardMembers = [
     { name: 'Dr M Goutham Reddy', image: 'assets/about_us/dr_goutham_reddy.jpg', label: 'Medical Director' },
     { name: 'Dr E Venkat Ramana Reddy', image: 'assets/about_us/dr_venkat_ramana_reddy.jpg', label: 'Medical Director' },
