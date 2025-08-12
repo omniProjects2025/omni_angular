@@ -42,13 +42,11 @@ h2 {
   font-weight: 500;
 }
 
-/*** Banner End ***/
 .sidebar {
   background: rgb(15, 157, 204);
   border-radius: 12px;
   padding: 20px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  /* max-width: 280px; */
 }
 
 .sidebar-title {
@@ -56,14 +54,12 @@ h2 {
   font-weight: 600;
   margin-bottom: 20px;
   color: #fff;
-  /* White text for contrast */
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
 .category-container {
   overflow: hidden;
-  /* Remove overflow for vertical scrolling */
 }
 
 .category-list {
@@ -79,9 +75,7 @@ h2 {
   cursor: pointer;
   border-radius: 8px;
   background-color: rgb(40 171 215);
-  /* Transparent white background */
   color: white;
-  /* White text on dark background */
   transition: background-color 0.3s, transform 0.3s, color 0.3s;
 }
 

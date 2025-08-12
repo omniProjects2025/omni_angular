@@ -2,8 +2,6 @@
 <header class="container-fluid p-0 position-relative bg-white">
   <div class="owl-carousel banner-slider owl-theme position-relative m-0" style="margin: 0px !important;">
     <div class="banner-item position-relative">
-      <div class="banner-caption">
-      </div>
       <img src="assets/images/Not Sure About Surgery-01.jpg" class="w-100" alt="Banner 1">
     </div>
 
@@ -149,7 +147,7 @@
               <div class="inner-box d-flex align-items-center gap-2">
                 <img [src]="item.img" [alt]="item.title" width="80" height="80">
                 <div class="text-start">
-                  <h5 class="mb-0 fw-bold text-primary">{{ item.value }}</h5>
+                  <h5 class="mb-0 fw-bold text_primary">{{ item.value }}</h5>
                   <small class="text-dark fw-medium">{{ item.title }}</small>
                 </div>
               </div>
@@ -159,55 +157,6 @@
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-<!-- Why Choose Us Section -->
-<!-- <section class="bg_choose d-flex align-items-center">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-4 mb-4 mb-md-0 position-relative">
-        <img src="assets/images/indian-female-doctor-with-stethoscope-her-neck 2.png" alt="Doctors Team"
-          class="img-fluid doctor-img-custom" />
-      </div>
-
-      <div class="col-md-8">
-        <h4 class="choose_txt fw-bold mt-5">WHY CHOOSE OMNI HOSPITALS?</h4>
-        <p class="text-justify">
-          OMNI Hospitals is committed to delivering exceptional healthcare that combines advanced medical expertise with
-          compassionate care. With a strong presence across multiple locations,
-          <span *ngIf="showMore">
-            we offer a wide range of super-specialty services designed to meet the evolving needs of patients and their
-            families.
-          </span>
-          <button (click)="toggleReadMore()" class="btn btn-link choose_txt fw-bold p-0">
-            {{ showMore ? 'Read Less <<' : 'Read More >>' }} </button>
-        </p>
-        <div class="row text-center mt-4">
-          <div class="col-6 col-md-6 mb-4 d-flex align-items-center justify-content-center"
-            *ngFor="let counter of counters">
-            <div class="d-flex align-items-center justify-content-start w-100" style="min-height: 100px;">
-              <div class="icon-circle flex-shrink-0">
-                <img class="why_choose_img" src="assets/images/{{ counter.img }}" alt="{{ counter.label }}" />
-              </div>
-              <div class="text-start ms-3 d-flex flex-column justify-content-center" style="min-height: 80px;">
-                <h5 class="counter mb-0 why_choose_value" style="font-weight:900" [attr.data-target]="counter.target">
-                  {{ counter.value }}+
-                </h5>
-                <span class="counter-label why_choose_label" style="font-weight:400">{{ counter.label }}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section> -->
 
 <section>
   <div class="title-container mb-3 mt-1">
@@ -292,26 +241,21 @@
     </div>
   </div>
 </section>
-
 <!-- Testimonial Section End -->
 
 <!-- Blogs code start from here -->
 <section class="bg_blog container-fluid">
   <div class="py-3 wow fadeInUp mx-3 cont" data-wow-delay="0.1s">
     <div class="title-container mb-3 mt-1">
-      <!-- <div class="line line-left"></div> -->
       <h1 class="blog-title" style="font-size: 30px; font-family: 'roboto'; color: #0E9CCD; font-weight: 500;">
         Blogs
       </h1>
-      <!-- <div class="line line-right"></div> -->
     </div>
 
     <!-- Owl Carousel -->
     <div class="owl-carousel" #blogCarousel>
       <div *ngFor="let blog of blogs; let idx = index" class="blog-item card p-2">
-        <!-- Image Section (Top) -->
         <img [src]="blog.image" class="blog-image img_rounded" alt="Blog Image">
-        <!-- Description Section (Bottom) -->
         <div class="blog-content pt-3 gap-1 d-flex flex-column">
           <h5 class="blog-title p-0 m-0">{{ blog.title }}</h5>
           <p class="blog-text p-0 m-0">{{ blog.description }}</p>
@@ -331,7 +275,6 @@
   </div>
 </section>
 <!-- Blogs code End here -->
-
 
 <!-- FAQ Section -->
 <section>
@@ -383,7 +326,7 @@
       <h5 class="fw-bold mb-3 text-center">Have Questions Or Need Assistance?</h5>
       <!-- Left Text -->
       <!-- <div class="col-md-2 text-end"> -->
-        <h2 class=" col-md-2 fw-bold lh-sm m-0 fs-4">WE'RE HERE FOR YOU, ANYTIME!</h2>
+      <h2 class=" col-md-2 fw-bold lh-sm m-0 fs-4">WE'RE HERE FOR YOU, ANYTIME!</h2>
       <!-- </div> -->
 
       <!-- Form Section -->
@@ -392,41 +335,38 @@
           class="d-flex flex-column gap-2 flex-wrap flex-md-nowrap">
           <div class="d-flex w-100 gap-3">
             <!-- Name Field -->
-             <div>
-            <input type="text" class="form-control" name="name" placeholder="Name*"
-              style="width: 300px; height: 42px; border: 1px solid #0B99CE;" [(ngModel)]="formData.name" required
-              #name="ngModel">
-            <div *ngIf="name.invalid && name.touched" class="text-danger mt-1">Name is required</div>
+            <div>
+              <input type="text" class="form-control" name="name" placeholder="Name*"
+                style="width: 300px; height: 42px; border: 1px solid #0B99CE;" [(ngModel)]="formData.name" required
+                #name="ngModel">
+              <div *ngIf="name.invalid && name.touched" class="text-danger mt-1">Name is required</div>
+            </div>
+
+            <!-- Phone Field -->
+            <div>
+              <input type="text" class="form-control" name="phone" placeholder="Phone Number*"
+                style="width: 300px; height: 42px; border: 1px solid #0B99CE;" [(ngModel)]="formData.phone" required
+                #phone="ngModel">
+              <div *ngIf="phone.invalid && phone.touched" class="text-danger mt-1">Phone number is required</div>
+            </div>
+
+            <!-- Email Field -->
+            <div>
+              <input type="email" class="form-control" name="email" placeholder="Email"
+                style="width: 300px; height: 42px; border: 1px solid #0B99CE;" [(ngModel)]="formData.email" email
+                #email="ngModel">
+              <div *ngIf="email.invalid && email.touched" class="text-danger mt-1">Enter a valid email</div>
+            </div>
+
           </div>
 
-          <!-- Phone Field -->
-          <div>
-            <input type="text" class="form-control" name="phone" placeholder="Phone Number*"
-              style="width: 300px; height: 42px; border: 1px solid #0B99CE;" [(ngModel)]="formData.phone" required
-              #phone="ngModel">
-            <div *ngIf="phone.invalid && phone.touched" class="text-danger mt-1">Phone number is required</div>
-          </div>
-
-          <!-- Email Field -->
-          <div>
-            <input type="email" class="form-control" name="email" placeholder="Email"
-              style="width: 300px; height: 42px; border: 1px solid #0B99CE;" [(ngModel)]="formData.email" email
-              #email="ngModel">
-            <div *ngIf="email.invalid && email.touched" class="text-danger mt-1">Enter a valid email</div>
-          </div>
-
-          </div>
-          
 
           <!-- Submit button moved inside form -->
           <div class="w-100">
-          <button type="submit" class="btn px-5 py-1 text-center mt-3"
-            style="white-space: nowrap; background-color: #0291D5; color: white;">Submit</button>
+            <button type="submit" class="btn px-5 py-1 text-center mt-3"
+              style="white-space: nowrap; background-color: #0291D5; color: white;">Submit</button>
           </div>
         </form>
-
-        <!-- <button type="submit" class="btn px-5 py-1 text-center mt-3"
-          style="white-space: nowrap; background-color: #0291D5; color: white;">Submit</button> -->
       </div>
     </div>
   </div>
@@ -492,7 +432,7 @@
               <input type="text" class="form-control" id="fullName" placeholder=" " required>
               <label for="fullName" class="ps-0">Full Name</label>
             </div>
-<button type="submit" class="btn btn_outline_dark submit-btn">Submit</button>
+            <button type="submit" class="btn btn_outline_dark submit-btn">Submit</button>
           </div>
 
           <div class="form-floating mb-3">
@@ -528,7 +468,6 @@
           </div>
         </form>
       </div>
-      
     </div>
   </div>
 </div>
