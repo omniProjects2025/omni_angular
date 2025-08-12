@@ -1,6 +1,10 @@
 <app-header></app-header>
-
-<section class="bg-white py-3">
+<div *ngIf="isLoading" class="loader-container">
+    <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+<section class="bg-white py-3" *ngIf="!isLoading">
     <div class="title-container">
         <div class="line line-left"></div>
         <span class="title_text">OUR DOCTORS</span>

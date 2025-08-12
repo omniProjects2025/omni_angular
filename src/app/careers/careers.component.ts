@@ -64,36 +64,33 @@ export class CareersComponent {
   }
 
   onSubmit() {
-  if (this.applyForm.valid) {
-    const formData = new FormData();
-    formData.append('firstName', this.applyForm.get('firstName')?.value);
-    formData.append('lastName', this.applyForm.get('lastName')?.value);
-    formData.append('phone', this.applyForm.get('phone')?.value);
-    formData.append('email', this.applyForm.get('email')?.value);
-    formData.append('position', this.applyForm.get('position')?.value);
+    if (this.applyForm.valid) {
+      const formData = new FormData();
+      formData.append('firstName', this.applyForm.get('firstName')?.value);
+      formData.append('lastName', this.applyForm.get('lastName')?.value);
+      formData.append('phone', this.applyForm.get('phone')?.value);
+      formData.append('email', this.applyForm.get('email')?.value);
+      formData.append('position', this.applyForm.get('position')?.value);
 
-    // Attach file
-    if (this.selectedFile) {
-      formData.append('resume', this.selectedFile, this.selectedFile.name);
+      if (this.selectedFile) {
+        formData.append('resume', this.selectedFile, this.selectedFile.name);
+      }
+
+      this.http.post('http://localhost:3000/send-email', formData).subscribe(
+        res => alert('Email sent successfully!'),
+        err => alert('Failed to send email.')
+      );
+
+      this.applyForm.reset();
+    } else {
+      this.applyForm.markAllAsTouched();
     }
-
-    // Send FormData in the request
-    this.http.post('http://localhost:3000/send-email', formData).subscribe(
-      res => alert('Email sent successfully!'),
-      err => alert('Failed to send email.')
-    );
-
-    this.applyForm.reset();
-  } else {
-    this.applyForm.markAllAsTouched();
   }
-}
 
-// Capture file selection event
-onFileChange(event: any) {
-  if (event.target.files.length > 0) {
-    this.selectedFile = event.target.files[0];  // Store selected file
+  onFileChange(event: any) {
+    if (event.target.files.length > 0) {
+      this.selectedFile = event.target.files[0];
+    }
   }
-}
 
 }

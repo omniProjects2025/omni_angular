@@ -86,18 +86,12 @@
             (click)="setActive(item.key)">
             {{ item.label }}
           </a>
-
           <!-- Modal item -->
-          <!-- <a *ngIf="item.modalTarget" class="nav-link" href="javascript:void(0)" [attr.data-bs-toggle]="'modal'"
-            [attr.data-bs-target]="item.modalTarget" [ngClass]="{ 'active': isModalRouteActive('/our-branches') }"
-            (click)="setActive(item.key)">
-            {{ item.label }}
-          </a> -->
           <!-- Submenu -->
           <ul class="dropdown-menu show " *ngIf="item.children && hoveredItem === item.key">
             <li *ngFor="let child of item.children">
               <a class="dropdown-item"
-                (click)="onChildClick(item.key, child.id,child.img)">
+                (click)="onChildClick(item.key, child.id)">
                 {{ child.label }}
               </a>
             </li>

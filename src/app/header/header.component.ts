@@ -18,15 +18,27 @@ export class HeaderComponent {
     { key: 'home', label: '', route: '/home' },
     {
       key: 'about', label: 'About us', route: '/about-us',
-      children: [
-        { id: 'aboutOmni', label: 'About OMNI Hospitals', img: '', route: '/about-us' },
-        { id: 'ourChairman', label: 'Our Chairman', img: '', route: '/about-us' },
-        { id: 'boardMembers', label: 'Board Members', img: '', route: '/about-us' },
-        { id: 'leadershipTeam', label: 'Leadership Team', img: '', route: '/about-us' },
-      ],
     },
-    { key: 'doctor', label: 'Find a Doctor', img: '', route: '/our-doctors' },
-    { key: 'specialities', label: 'Our Specialities', route: '/our-specialities' },
+    { key: 'doctor', label: 'Find a Doctor', route: '/our-doctors' },
+    {
+      key: 'specialities', label: 'Our Specialities', route: '/our-specialities',
+      children: [
+        { id: '', label: 'Cardiology', route: '/speciality/cardiology' },
+        { id: '', label: 'Dermatology', route: '/speciality/dermatology' },
+        { id: '', label: 'Emergency Medicine & Critical Care', route: '/speciality/emergency-medicine' },
+        { id: '', label: 'ENT', route: '/speciality/ent' },
+        { id: '', label: 'General Medicine', route: '/speciality/general-medicine' },
+        { id: '', label: 'General Surgery', route: '/speciality/general-surgery' },
+        { id: '', label: 'Medical & Surgical Gastroenterology', route: '/speciality/gastroenterology' },
+        { id: '', label: 'Nephrology & Urology', route: '/speciality/nephrology-urology' },
+        { id: '', label: 'Obstetrics & Gynaecology', route: '/speciality/obstetrics-gynaecology' },
+        { id: '', label: 'Orthopedic', route: '/speciality/orthopedic' },
+        { id: '', label: 'Paediatrics', route: '/speciality/paediatrics' },
+        { id: '', label: 'Psychiatry', route: '/speciality/psychiatry' },
+        { id: '', label: 'Pulmonology', route: '/speciality/pulmonology' },
+        { id: '', label: 'Vascular Surgery', route: '/speciality/vascular-surgery' }
+      ]
+    },
     {
       label: 'Our Branches', key: 'branches', modalTarget: '#branchesModal',
       children: [
@@ -72,8 +84,8 @@ export class HeaderComponent {
       title: '888 0101 000',
     },
     {
-      icon:'assets/icons/nabh_patient_safety_and_quality_of care_.svg',
-      title:''
+      icon: 'assets/icons/nabh_patient_safety_and_quality_of care_.svg',
+      title: ''
     }
   ];
 
@@ -157,7 +169,7 @@ export class HeaderComponent {
     }).catch(error => console.error('Navigation error:', error));
   }
 
-  onChildClick(key: string, id: string, img: string) {
+  onChildClick(key: string, id: string) {
     if (key === 'about') {
       this.router.navigate(['/about-us'], { queryParams: { id: id } });
       this.setActiveSection(id);
@@ -165,7 +177,7 @@ export class HeaderComponent {
       this.router.navigate(['/our-branches'], {
         queryParams: {
           selected_location: id,
-          selected_image: img,
+          // selected_image: img,
         }
       });
     }
@@ -180,4 +192,5 @@ export class HeaderComponent {
     this.hoveredItem = null;
     // this.router.navigate(['/about-us'], { queryParams: {sectionId: id} });
   }
+
 }

@@ -86,3 +86,8 @@
   font-weight: 500;
   font-size: 30px;
 }
+@media (max-width: 576px) {
+  .h_txt {
+    font-size: 1.50rem;
+  }
+}

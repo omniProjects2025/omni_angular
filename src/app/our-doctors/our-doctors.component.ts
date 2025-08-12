@@ -9,6 +9,7 @@ import { DoctordetailsService } from '../doctordetails.service';
 })
 export class OurDoctorsComponent {
   allDoctorData: any[] = [];
+  isLoading = true;
   doctors: any[] = [];
   selectedLocation = '';
   selectedSpeciality = '';
@@ -23,23 +24,31 @@ export class OurDoctorsComponent {
   }
 
   getDoctorDetails() {
-    this.doctorservice.getDoctors().subscribe((data: any) => {
-      this.allDoctorData = data.data || [];
-      this.doctors = this.allDoctorData.flatMap(loc =>
-        loc.doctors.map((doc: any) => ({
-          ...doc,
-          doctor_name: doc.name,
-          doctor_location: doc.work_location.trim() || '',
-          doctor_designation: doc.specialization,
-          profile: doc.profile,
-          qualification: doc.qualification,
-          experience: doc.experience,
-          id: doc.id
-        }))
-      );
+    this.isLoading = true;
+    this.doctorservice.getDoctors().subscribe({
+      next: (data: any) => {
+        this.allDoctorData = data.data || [];
+        this.doctors = this.allDoctorData.flatMap(loc =>
+          loc.doctors.map((doc: any) => ({
+            ...doc,
+            doctor_name: doc.name,
+            doctor_location: doc.work_location.trim() || '',
+            doctor_designation: doc.specialization,
+            profile: doc.profile,
+            qualification: doc.qualification,
+            experience: doc.experience,
+            id: doc.id
+          }))
+        );
 
-      this.locations = [...new Set(this.doctors.map(d => d.doctor_location.trim()).filter(Boolean))];
-      this.specialities = [...new Set(this.doctors.map(d => d.doctor_designation.trim()).filter(Boolean))];
+        this.locations = [...new Set(this.doctors.map(d => d.doctor_location.trim()).filter(Boolean))];
+        this.specialities = [...new Set(this.doctors.map(d => d.doctor_designation.trim()).filter(Boolean))];
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.error(err);
+        this.isLoading = false;
+      }
     });
   }
 
@@ -48,8 +57,6 @@ export class OurDoctorsComponent {
     this.updateSpecialitiesByLocation();
     this.applyFilters();
   }
-
-
 
   updateSpecialitiesByLocation() {
     const location = this.selectedLocation.toLowerCase().trim();
@@ -66,10 +73,6 @@ export class OurDoctorsComponent {
       this.selectedSpeciality = '';
     }
   }
-
-
-
-
 
   applyFilters() {
     this.updateSpecialitiesByLocation();
@@ -96,10 +99,6 @@ export class OurDoctorsComponent {
       return matchesName && matchesLocation && matchesSpeciality;
     });
   }
-
-
-
-
 
   goToDoctorDetails(doctor_name: string) {
     this.router.navigate(['/doctor-details'], {

@@ -166,3 +166,15 @@ select.form-select {
   position: relative;
   z-index: 1;
 }
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 0;
+}
+
+.loader-image {
+  width: 60px; /* adjust size */
+  height: 60px;
+}
