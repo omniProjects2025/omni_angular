@@ -5,12 +5,10 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
 register();
 declare var $: any;
-// declare var Swiper: any;
 
 import 'owl.carousel';
 import { firstValueFrom, Observable } from 'rxjs';
 import { UsersService } from '../users.service';
-import { NewsService } from '../services/news.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -20,7 +18,6 @@ export class HomeComponent {
 
   @ViewChild('owlCarousel', { static: false }) owlCarousel!: ElementRef;
   @ViewChild('patientowlCarousel', { static: false }) patientowlCarousel!: ElementRef;
-  @ViewChild('newsMediaCarousel', { static: false }) newsMediaCarousel!: ElementRef;
   @ViewChild('blogCarousel', { static: false }) blogCarousel!: ElementRef;
   @ViewChild('swiperContainer', { static: false }) swiperContainer!: ElementRef;
   readMoreVisible = false;
@@ -28,7 +25,6 @@ export class HomeComponent {
   carouselInitialized = false;
   spanizedHeading: string[] = [];
   spanizedParagraph: string[] = [];
-  newsMedia: any[] = [];
   showFullText = false;
 
   videoPlayed: boolean = false;
@@ -44,7 +40,6 @@ export class HomeComponent {
   showmoreactive_one: boolean = false;
   startIndex = 0;
   currentIndex = 0;
-  currentNewsIndex: number = 0;
   currentBlogIndex = 0;
   totalItems: number = 0;
   prevBtn!: HTMLElement | null;
@@ -53,10 +48,10 @@ export class HomeComponent {
   slidesPerView = 3;
 
   breakpointsJson = JSON.stringify({
-    0: { slidesPerView: 1.1 },     // small devices
-    480: { slidesPerView: 1.5 },   // mobile landscape
-    768: { slidesPerView: 2 },     // tablets
-    1024: { slidesPerView: 3 }     // desktop
+    0: { slidesPerView: 1.1 },
+    480: { slidesPerView: 1.5 },
+    768: { slidesPerView: 2 },
+    1024: { slidesPerView: 3 }
   });
 
   canSlidePrev = false;
@@ -198,21 +193,20 @@ export class HomeComponent {
       text: 'Excellant service is provided by DR ANUD IN DIALYSIS DEPT DURING DIALYSIS WHILE I WAS HAVING CRAMPS PROBLEM. ...M RAVINDAR KUMAR'
     },
     {
-      name:'Shobha Rani',
-      location:'Kothapet',
-      image:'assets/technologies/women_dummy_profile.svg',
-      text:'I had a nose surgery in omni hospital kothapet, and was extremely impressed with the care we received'
+      name: 'Shobha Rani',
+      location: 'Kothapet',
+      image: 'assets/technologies/women_dummy_profile.svg',
+      text: 'I had a nose surgery in omni hospital kothapet, and was extremely impressed with the care we received'
     },
-        {
-      name:'Nandikonda Rajeshwar',
-      location:'Kothapet',
-      image:'assets/technologies/men_dummy_profile.svg',
-      text:'I had surgery in this hospital,excellent hospitality and good response for every moment'
+    {
+      name: 'Nandikonda Rajeshwar',
+      location: 'Kothapet',
+      image: 'assets/technologies/men_dummy_profile.svg',
+      text: 'I had surgery in this hospital,excellent hospitality and good response for every moment'
     }
   ];
 
 
-  totalNewsSlides: number = 0;
   hoveredCard = '';
 
   testimonials = [
@@ -403,11 +397,11 @@ export class HomeComponent {
   index = 0;
 
   formData = {
-  name: '',
-  phone: '',
-  email: ''
-};
-  constructor(private newsservice: NewsService, private http: HttpClient, private sanitizer: DomSanitizer, private router: Router, private renderer: Renderer2, private cdr: ChangeDetectorRef, private UsersService: UsersService) {
+    name: '',
+    phone: '',
+    email: ''
+  };
+  constructor(private http: HttpClient, private sanitizer: DomSanitizer, private router: Router, private renderer: Renderer2, private cdr: ChangeDetectorRef, private UsersService: UsersService) {
 
   }
 
@@ -416,26 +410,9 @@ export class HomeComponent {
     this.onBackendIntigration()
     this.onUserDetails()
     this.getUsers();
-    this.getNewsDetails()
     this.updateSlidesPerView();
     window.addEventListener('resize', this.updateSlidesPerView.bind(this));
     register();
-  }
-
-  getNewsDetails() {
-    this.newsservice.getAllNews().subscribe((response: any) => {
-      if (response && response.data && response.data.length > 0) {
-        this.newsMedia = response.data[0].news;
-        console.log('News details fetched successfully:', this.newsMedia);
-        console.log(this.newsMedia);
-        this.totalNewsSlides = this.newsMedia.length;
-
-      } else {
-        console.error('No data found in the response');
-      }
-    }, (error: any) => {
-      console.error('Error fetching news details:', error);
-    });
   }
 
   async onBackendIntigration() {
@@ -477,12 +454,6 @@ export class HomeComponent {
     this.observeCounters();
     this.bannerImagesSlides();
     this.blogsSlide();
-    setTimeout(() => {
-      if (this.newsMedia.length > 0) {
-        this.news();
-      }
-    }, 100);
-
     this.owl();
     this.testowl();
     setTimeout(() => {
@@ -507,10 +478,6 @@ export class HomeComponent {
     if (this.activeIndex === 2 && this.swiperContainer?.nativeElement?.swiper) {
       const swiper = this.swiperContainer.nativeElement.swiper;
       this.updateArrowStates(swiper);
-    }
-    if (this.newsMedia && this.newsMedia.length > 0 && !this.carouselInitialized) {
-      this.news();
-      this.carouselInitialized = true;
     }
 
   }
@@ -619,13 +586,7 @@ export class HomeComponent {
     this.currentIndex = index;
     $(this.owlCarousel.nativeElement).trigger('to.owl.carousel', [index, 300]);
   }
-  goToNewsSlide(index: number) {
-    this.currentNewsIndex = index;
-    $(this.newsMediaCarousel.nativeElement).trigger('to.owl.carousel', [index, 300]);
-    console.log('Current News Index:', this.currentNewsIndex);
 
-
-  }
   goToBlogSlide(index: number) {
     this.currentBlogIndex = index;
     $(this.blogCarousel.nativeElement).trigger('to.owl.carousel', [index, 300]);
@@ -674,15 +635,6 @@ export class HomeComponent {
     });
   }
 
-  onNewsCLick() {
-    this.router.navigate(['/news-media']).then(success => {
-      if (success) {
-        console.log('Navigation to technologies successful');
-      } else {
-        console.log('Navigation failed');
-      }
-    }).catch(error => console.error('Navigation error:', error));
-  }
   goToBlogDetails(blog_name: any) {
     this.router.navigate(['/blogs-details-data'], {
       queryParams: {
@@ -803,30 +755,6 @@ export class HomeComponent {
     });
   }
 
-  news() {
-    const newsowl = $(this.newsMediaCarousel.nativeElement);
-    newsowl.owlCarousel({
-      loop: true,
-      margin: 15,
-      nav: false,
-      dots: false,
-      autoplay: true,
-      autoplayTimeout: 3000,
-      autoplayHoverPause: true,
-      responsive: {
-        0: { items: 1 },
-        768: { items: 2 },
-        992: { items: 3 }
-      }
-    });
-    newsowl.on('changed.owl.carousel', (event: any) => {
-      const realIndex = event.item.index - event.relatedTarget._clones.length / 2;
-      this.currentNewsIndex = (realIndex + this.totalNewsSlides) % this.totalNewsSlides;
-      this.cdr.detectChanges(); // ✅ Force Angular to update view
-    });
-
-  }
-
   onVideoPlay(index: number): void {
     this.owlInstance.trigger('stop.owl.autoplay');
   }
@@ -872,13 +800,6 @@ export class HomeComponent {
       }
     );
   }
-  goToMediaDetails(obj: any) {
-    this.router.navigate(['/news-media-details'], {
-      queryParams: {
-        selected_obj: JSON.stringify(obj)
-      }
-    });
-  }
 
 
   toggleFaq(index: number) {
@@ -890,14 +811,14 @@ export class HomeComponent {
   }
 
   onSubmit(form: any) {
-  if (form.valid) {
-    console.log('Form Submitted:', this.formData);
-    // Perform your submit logic here
-  } else {
-    // Mark all controls as touched to show errors
-    Object.keys(form.controls).forEach(field => {
-      form.controls[field].markAsTouched();
-    });
+    if (form.valid) {
+      console.log('Form Submitted:', this.formData);
+      // Perform your submit logic here
+    } else {
+      // Mark all controls as touched to show errors
+      Object.keys(form.controls).forEach(field => {
+        form.controls[field].markAsTouched();
+      });
+    }
   }
-}
 }

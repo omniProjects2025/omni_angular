@@ -38,6 +38,8 @@ export class OurSpecialitiesComponent {
     this.filteredSpecialties = location === 'All'
       ? this.specialties
       : this.specialties.filter(s => s.location.includes(location));
+    console.log(this.filteredSpecialties, 'filteredSpecialties...');
+
   }
 
   goToDetails(speciality: string) {

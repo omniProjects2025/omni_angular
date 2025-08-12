@@ -61,7 +61,6 @@ export class BlogsComponent {
   selectCategory(categoryName: string): void {
     this.selectedCategory = categoryName;
     console.log('this.selectedCategory',this.selectedCategory);
-    
     this.currentPage = 1;
     this.updateDisplayedBlogs();
   }

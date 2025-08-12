@@ -1,11 +1,8 @@
-.bg_blue{
+.bg_blue {
   background-color: #f2f9fd !important;
   background: #f2f9fd !important;
 }
-/* .card-img-top {
-  height: 180px;
-  object-fit: cover;
-} */
+
 
 .card-body {
   padding: 1rem 1.25rem;
@@ -16,30 +13,35 @@ h2 {
   position: relative;
   display: inline-block;
 }
-.card-title{
+
+.card-title {
   font-size: 16px;
   font-weight: 400;
   font-family: 'roboto';
   color: rgba(0, 0, 0, 1) !important;
 }
-.card-text{
+
+.card-text {
   color: rgba(130, 130, 130, 1) !important;
   font-family: 'roboto';
   font-size: 12px;
   font-weight: 500;
 }
-.date_txt{
+
+.date_txt {
   color: rgba(0, 0, 0, 1) !important;
   font-family: 'roboto';
   font-size: 12px;
   font-weight: 500;
 }
-.read_txt{
+
+.read_txt {
   color: rgba(0, 0, 0, 1) !important;
   font-family: 'roboto';
   font-size: 12px;
   font-weight: 500;
 }
+
 /*** Banner End ***/
 .sidebar {
   background: rgb(15, 157, 204);
@@ -53,13 +55,15 @@ h2 {
   font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: 20px;
-  color: #fff; /* White text for contrast */
+  color: #fff;
+  /* White text for contrast */
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
 .category-container {
-  overflow: hidden; /* Remove overflow for vertical scrolling */
+  overflow: hidden;
+  /* Remove overflow for vertical scrolling */
 }
 
 .category-list {
@@ -74,20 +78,22 @@ h2 {
   font-size: 1.1rem;
   cursor: pointer;
   border-radius: 8px;
-  background-color: rgb(40 171 215); /* Transparent white background */
-  color: white; /* White text on dark background */
+  background-color: rgb(40 171 215);
+  /* Transparent white background */
+  color: white;
+  /* White text on dark background */
   transition: background-color 0.3s, transform 0.3s, color 0.3s;
 }
 
 .category-item:hover {
-  background-color: rgb(15 157 204); /* Slightly brighter white on hover */
-  color: #000; /* Dark text on hover */
+  background-color: rgb(15 157 204);
+  color: #000;
   transform: translateX(5px);
 }
 
 .category-item.active {
-  background-color: rgb(15, 157, 204); /* Lighter white for active items */
-  color: #000; /* Dark text for active state */
+  background-color: rgb(15, 157, 204);
+  color: #000;
   transform: translateX(5px);
 }
 
@@ -95,13 +101,15 @@ h2 {
   display: block;
   text-transform: capitalize;
 }
-.clamp{
+
+.clamp {
   display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
+
 .pagination-container {
   display: flex;
   justify-content: center;
