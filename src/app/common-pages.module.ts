@@ -28,6 +28,7 @@ import { FixedSurgeryDetailsComponent } from './fixed-surgery-details/fixed-surg
 import { OurEmpanelmentComponent } from './our-empanelment/our-empanelment.component';
 import { BlogDetailsDataComponent } from './blog-details-data/blog-details-data.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { PatientCareComponent } from './patient-care/patient-care.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -56,6 +57,8 @@ const routes: Routes = [
   { path: 'fixed-surgery-details', component: FixedSurgeryDetailsComponent },
   { path: 'our-empanelment', component: OurEmpanelmentComponent },
   { path: 'thank-you', component: ThankYouComponent },
+  { path: 'patient-care', component: PatientCareComponent },
+
   { path: '**', component: NotFoundComponent }, // 👈 Show 404 page here
 ];
 

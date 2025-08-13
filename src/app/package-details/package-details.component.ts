@@ -1,8 +1,9 @@
 import { ChangeDetectorRef, Component, Renderer2 } from '@angular/core';
 import { HealthPackageService } from '../health-package.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { HttpClient } from '@angular/common/http';
 declare var $: any;
 interface HealthPackage {
   _id: string;
@@ -23,6 +24,12 @@ interface HealthPackage {
   styleUrls: ['./package-details.component.css']
 })
 export class PackageDetailsComponent {
+  packageData = {
+    fullName: '',
+    emailId: '',
+    phoneNumber: '',
+    appointmentDate: ''
+  };
   packages: any[] = [];
   selected_map_location = "";
   appointmentForm!: FormGroup;
@@ -95,7 +102,9 @@ export class PackageDetailsComponent {
     private activated_routes: ActivatedRoute,
     private fb: FormBuilder,
     private sanitizer: DomSanitizer,
-    private cdr: ChangeDetectorRef
+    private http: HttpClient,
+    private cdr: ChangeDetectorRef,
+    private router: Router
   ) {
     this.valiDations()
   }
@@ -128,8 +137,8 @@ export class PackageDetailsComponent {
       try {
         const parsed = typeof raw === 'string' ? JSON.parse(raw) : raw;
         this.selectedPackage = parsed;
-        console.log(this.selectedPackage,'selectedPackage faqs checking...');
-        
+        console.log(this.selectedPackage, 'selectedPackage faqs checking...');
+
       } catch (e) {
         console.error('Failed to parse selected_obj', e);
         this.selectedPackage = null;
@@ -145,7 +154,7 @@ export class PackageDetailsComponent {
 
   healthPackageSlides() {
     $('.owl-carousel').owlCarousel({
-      loop: this.carouselPackages.length>2,
+      loop: this.carouselPackages.length > 2,
       margin: 16,
       nav: false,
       dots: false,
@@ -198,7 +207,6 @@ export class PackageDetailsComponent {
     }
     this.destroyOwlCarousel();
 
-    // Delay a bit for DOM to update, then get new data and reinit carousel
     setTimeout(() => {
       this.getPackageDetails();
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -230,18 +238,71 @@ export class PackageDetailsComponent {
     }
   }
 
-  submitForm() {
-    if (this.appointmentForm.valid) {
-      alert('Appointment Booked Successfully!');
-      console.log(this.appointmentForm.value, 'values..');
-      this.modalInstance.hide();
-      setTimeout(() => {
-        this.appointmentForm.reset();
-      }, 300);
-    } else {
-      alert('Please fill in all required fields correctly.');
+  submitPackageForm() {
+    if (this.appointmentForm && this.appointmentForm.valid) {
+      this.packageData.fullName = this.appointmentForm.value.name;
+      this.packageData.emailId = this.appointmentForm.value.email;
+      this.packageData.phoneNumber = this.appointmentForm.value.mobile;
+      this.packageData.appointmentDate = ''; // If needed, you can add a date field to the modal
     }
+    // 1️⃣ Validation
+    if (!this.packageData.fullName.trim()) {
+      alert('Full Name is required.');
+      return;
+    }
+    if (!this.packageData.phoneNumber.trim()) {
+      alert('Phone Number is required.');
+      return;
+    }
+
+    // 2️⃣ 30-minute restriction
+    const lastSubmission = localStorage.getItem('lastPackageBooking');
+    if (lastSubmission) {
+      const { name, phone, time } = JSON.parse(lastSubmission);
+      const thirtyMinutes = 30 * 60 * 1000;
+      if (
+        name === this.packageData.fullName.trim() &&
+        phone === this.packageData.phoneNumber.trim() &&
+        Date.now() - time < thirtyMinutes
+      ) {
+        alert('You already submitted a booking with this name and phone in the last 30 minutes.');
+        return;
+      }
+    }
+
+    const payload = [
+      { Attribute: 'FirstName', Value: this.packageData.fullName },
+      { Attribute: 'Phone', Value: this.packageData.phoneNumber },
+      { Attribute: 'EmailAddress', Value: this.packageData.emailId },
+      // { Attribute: 'mx_PackageName', Value: this.selectedPackage.package_title },
+      // { Attribute: 'mx_PackagePrice', Value: this.selectedPackage.newPrice },
+      { Attribute: 'mx_AppointmentDate', Value: this.packageData.appointmentDate },
+      { Attribute: 'Source', Value: 'Website - Package Booking' }
+    ];
+
+    const accessKey = 'u$r56afea08b32d556818ad1a5f69f0e7f0';
+    const secretKey = '8d7f86d677dadaba209b4dead3cfcc4ab019031b';
+    const api_url_base = 'https://api-in21.leadsquared.com/v2/';
+    const url = `${api_url_base}LeadManagement.svc/Lead.Capture?accessKey=${accessKey}&secretKey=${secretKey}`;
+    this.http.post(url, payload, { headers: { 'Content-Type': 'application/json' } })
+      .subscribe({
+        next: (res) => {
+          console.log('LeadSquared Booking Success:', res);
+          localStorage.setItem('lastPackageBooking', JSON.stringify({
+            name: this.packageData.fullName.trim(),
+            phone: this.packageData.phoneNumber.trim(),
+            time: Date.now()
+          }));
+          this.router.navigate(['/thank-you']);
+          this.modalInstance.hide();
+        },
+        error: (err) => {
+          console.error('LeadSquared Error:', err);
+          alert('There was a problem submitting your booking.');
+        }
+      });
   }
+
   capitalizeText(text: string): string {
     return text
       .toLowerCase()

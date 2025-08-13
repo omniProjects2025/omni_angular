@@ -1,4 +1,3 @@
-/* Footer Base */
 .footer {
   background: linear-gradient(90deg, #008FD5 0%, #0F9DCC 100%);
   color: #fff;
@@ -74,7 +73,6 @@
   transform: scale(1.1);
 }
 
-/* Bottom Strip */
 .footer-bottom {
   background-color: #fff;
   color: #000;
@@ -91,7 +89,6 @@
   margin-left: 20px;
 }
 
-/* Responsive */
 @media (max-width: 991px) {
   .footer-container {
     grid-template-columns: 1fr 1fr;

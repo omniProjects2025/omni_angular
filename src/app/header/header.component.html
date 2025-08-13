@@ -75,7 +75,7 @@
           (mouseleave)="hoveredItem = null">
           <!-- Routing item -->
           <a *ngIf="item.route" class="nav-link" [routerLink]="item.route" routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }"  (click)="setActive(item.key)">
+            [routerLinkActiveOptions]="{ exact: true }" (click)="setActive(item.key)">
             <ng-container *ngIf="item.key === 'home'">
               <img src="assets/icons/home_page_btn.svg" class="me-1" alt="" width="25px" height="25px" />
             </ng-container>
@@ -88,14 +88,16 @@
           </a>
           <!-- Modal item -->
           <!-- Submenu -->
-          <ul class="dropdown-menu show " *ngIf="item.children && hoveredItem === item.key">
-            <li *ngFor="let child of item.children">
-              <a class="dropdown-item"
-                (click)="onChildClick(item.key, child.id)">
-                {{ child.label }}
-              </a>
-            </li>
+          <ul class="dropdown-menu p-3 mega-menu" *ngIf="item.children && hoveredItem === item.key">
+            <div class="row">
+              <div class="col-md-6" *ngFor="let child of item.children">
+                <a class="dropdown-item py-2 border-bottom" (click)="onChildClick(item.key, child.id)">
+                  {{ child.label }}
+                </a>
+              </div>
+            </div>
           </ul>
+
 
         </li>
       </ul>

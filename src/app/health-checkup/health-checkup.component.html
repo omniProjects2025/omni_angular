@@ -51,10 +51,10 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
-          <form [formGroup]="appointmentForm" (ngSubmit)="submitForm()">
+          <form [formGroup]="appointmentForm">
             <div class="mb-3">
               <label class="form-label">Package Type</label>
-              <input type="text" class="form-control" formControlName="packageType" readonly>
+              <input type="text" class="form-control" formControlName="speciality" readonly>
             </div>
             <div class="mb-3">
               <label class="form-label">Name</label>
@@ -80,8 +80,8 @@
                 Enter a valid 10-digit mobile number.
               </div>
             </div>
-            <div class="d-flex justify-content-center">
-              <button type="submit" class="btn btn-success w-50" [disabled]="appointmentForm.invalid">Submit</button>
+            <div class="d-flex justify-content-center" (click)="submitPackageForm()">
+              <button type="submit" class="btn btn-success w-50">Submit</button>
             </div>
           </form>
         </div>

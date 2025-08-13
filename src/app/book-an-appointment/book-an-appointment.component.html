@@ -1,12 +1,6 @@
-<!-- Title Section -->
 <app-header></app-header>
 <section class="bg-white">
   <div class="text-center py-4">
-    <!-- <h2 class="fw-bold position-relative d-inline-block">
-    <span class="dots me-2 text-primary">•••</span>
-    Book An Appointment
-    <span class="dots ms-2 text-primary">•••</span>
-  </h2> -->
     <div class="d-flex justify-content-center mb-3">
       <h2 class="position-relative d-inline-block px-3 h_txt">
         <img class="me-1" src="assets/health_checkup/dots_left.svg" alt="">
@@ -24,34 +18,28 @@
     </p>
   </div>
 
-  <!-- Appointment Section -->
   <div class="container-fluid px-3 px-md-5">
     <div class="row align-items-start position-relative">
 
-      <!-- Emergency Button -->
       <button
         class="btn bg_danger text-white emergency-btn d-flex flex-column justify-content-center align-items-center fw-bold"
         style="line-height: 1.4;" (click)="showEmergencyModal = true" *ngIf="!showEmergencyModal">
         <span *ngFor="let l of 'EMERGENCY'.split('')">{{ l }}</span>
       </button>
 
-      <!-- Doctor Image -->
       <div class="col-lg-5 mb-4 mb-lg-0 text-center">
         <img src="assets/our_doctors/book_an_appointment_image.svg" alt="Doctor" class="custom-appointment-image" />
       </div>
 
-      <!-- Form Section -->
       <div class="col-lg-7 mx-auto">
         <div class="d-flex justify-content-center">
           <div class="position-relative border-1 p-4 appointment-form-container"
             style="width:600px; border: 1px solid #000000; border-radius: 16px; background-color: #fff;">
-            <!-- Top "Contact Us" Tab -->
             <div class="position-absolute top-0 start-50 translate-middle-x bg-white px-4 center_align"
               style="margin-top: -24px; border: 1px solid #000000; border-radius: 24px;">
               <h5 class="m-0 text-center py-1 contact_txt">Contact Us</h5>
             </div>
 
-            <!-- Form Starts -->
             <form class="pt-4" (ngSubmit)="submitForm()" #form="ngForm">
               <div class="mb-3">
                 <label class="form-label">Full Name*</label>
@@ -106,20 +94,8 @@
           </div>
         </div>
 
-        <!-- Badge Section -->
         <div class="d-flex align-items-center flex-wrap justify-content-center my-4 mx-lg-0 mx-md-0 mx-4">
           <div class="consult-wrapper my-5 position-relative">
-            <!-- <svg class="curved-text-svg" viewBox="0 0 300 300">
-            <defs>
-              <path id="curvePath" d="M 150,150 m -100,0 a 100,100 0 1,1 200,0 a 100,100 0 1,1 -200,0" />
-            </defs>
-            <text fill="#000" font-size="16" font-family="Arial">
-              <textPath href="#curvePath" startOffset="25%">
-                To Book an Appointment
-              </textPath>
-            </text>
-          </svg> -->
-
             <img src="assets/icons/24by7_with_text.svg" alt="24/7 Support" class="overlap-img" />
 
             <div class="consult_button text-center py-2">
@@ -132,17 +108,14 @@
     </div>
   </div>
 
-  <!-- Emergency Slide-out Modal -->
   <div class="position-fixed" *ngIf="showEmergencyModal" style="top: 30%; left: 0; z-index: 1056;">
     <div class="bg_danger text-white p-3 rounded-end shadow d-flex" style="width: 350px;">
-      <!-- Left: Vertical EMERGENCY -->
       <div class="d-flex flex-column align-items-center pe-3" style="min-width: 30px;">
         <span *ngFor="let l of 'EMERGENCY'.split('')" class="fw-bold" style="line-height: 1.4; font-size: 20px;">
           {{ l }}
         </span>
       </div>
 
-      <!-- Right: Location and Numbers -->
       <div class="flex-grow-1 mt-3">
         <div class="d-flex justify-content-between align-items-center mb-2">
           <strong>Emergency Numbers</strong>
@@ -158,8 +131,6 @@
     </div>
   </div>
 
-
-  <!-- Bottom Strip -->
   <div class="container-fluid" style="margin-bottom: 2px;">
     <div class="row">
       <div class="col-md-4 bg_success p-3 d-flex align-items-center justify-content-start gap-3">
@@ -185,8 +156,6 @@
     </div>
   </div>
 
-
-  <!-- Our Branches modal -->
   <ng-container>
     <div class="modal fade" id="branchesModal" tabindex="-1" aria-labelledby="branchesModalLabel" aria-hidden="true"
       data-bs-backdrop="static">
@@ -220,6 +189,5 @@
       </div>
     </div>
   </ng-container>
-
 </section>
 <app-footer></app-footer>

@@ -28,6 +28,18 @@
   background: #fff;
 }
 
+.mega-menu {
+  min-width: 600px;
+}
+
+.mega-menu .dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.mega-menu .dropdown-item:hover {
+  background-color: transparent;
+  color: #007bff;
+}
 
 .blog_hover:hover,
 .media:hover {
@@ -87,7 +99,6 @@
   align-items: center;
   justify-content: center;
   flex-grow: 1;
-  /* Ensures it takes available space */
   text-align: center;
 }
 
@@ -106,7 +117,6 @@
 
 .btn_close {
   margin-left: auto;
-  /* Pushes the close button to the right */
 }
 
 .title-container {
@@ -125,7 +135,6 @@
 }
 
 .modal-body img {
-  /* width: 195px !important; */
   width: 100% !important;
   height: 150px !important;
   height: auto;
@@ -135,7 +144,6 @@
 
 .modal-content {
   background-color: #f8f9fa;
-  /* Adjusted to match the screenshot */
   border-radius: 15px;
 }
 

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OurSpecialitiesService } from '../our-specialities/our-specialities.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-our-specialities-details',
@@ -12,6 +13,11 @@ export class OurSpecialitiesDetailsComponent {
   selectedDepartment: any = {};
   selected_dep: string = '';
   departmentName: string = '';
+  enquiry = {
+    fullName: '',
+    phoneNumber: '',
+    emailId: ''
+  };
   locations = [
     { id: 'kukkatpally', name: 'Kukkatpally' },
     { id: 'Nampally', name: 'UDAI OMNI - Nampally' },
@@ -84,8 +90,7 @@ export class OurSpecialitiesDetailsComponent {
   searchName = '';
   selectedLocation = '';
   filteredDoctors = [...this.doctors];
-  // selectedLocation = this.locations[0];
-  constructor(private activated_routes: ActivatedRoute, private specialitiesService: OurSpecialitiesService
+  constructor(private activated_routes: ActivatedRoute, private specialitiesService: OurSpecialitiesService, private http: HttpClient, private router: Router
   ) {
     this.activatedRoutesData();
   }
@@ -97,25 +102,17 @@ export class OurSpecialitiesDetailsComponent {
 
   activatedRoutesData() {
     this.activated_routes.queryParams.subscribe(params => {
-      console.log(params,'params....');
+      console.log(params, 'params....');
       this.departmentName = params['selected_speciality'] || 'N/A';
       if (this.specialties?.length) {
         this.setSelectedDepartmentByName(this.departmentName);
       }
-      // console.log(res, 'params...');
-      // try {
-      //   this.selectedDepartment = res['selected_obj'] ? JSON.parse(res['selected_obj']) : {};
-      //   console.log(this.selectedDepartment, 'selectedDepartment...');
-      // } catch (err) {
-      //   this.selectedDepartment = {};
-      //   console.error('Failed to parse selected_obj:', err);
-      // }
 
       this.selected_dep = this.selectedDepartment._id || '';
       this.departmentName = this.selectedDepartment.name || 'N/A';
 
       console.log(this.departmentName, 'departmentName...');
-      this.filterDoctors();  // call filter immediately
+      this.filterDoctors();
     });
   }
 
@@ -124,7 +121,7 @@ export class OurSpecialitiesDetailsComponent {
     this.selectedDepartment = matched || {};
     this.selected_dep = matched?._id || '';
     console.log(this.selectedDepartment, 'matched department...');
-    this.filterDoctors();  // apply filtering logic
+    this.filterDoctors();
   }
 
 
@@ -147,14 +144,12 @@ export class OurSpecialitiesDetailsComponent {
 
     let tempDoctors = [...this.doctors];
 
-    // First: Filter by department if available
     if (department) {
       tempDoctors = tempDoctors.filter(doctor =>
         doctor.department.toLowerCase() === department
       );
     }
 
-    // Then: Filter by name and location
     this.filteredDoctors = tempDoctors.filter(doctor => {
       const matchName = !name || doctor.name.toLowerCase().includes(name);
       const matchLocation = !location || doctor.location === location;
@@ -174,4 +169,62 @@ export class OurSpecialitiesDetailsComponent {
     );
   }
 
+  submitEnquiry() {
+    if (!this.enquiry.fullName.trim()) {
+      alert('Full Name is required.');
+      return;
+    }
+    if (!this.enquiry.phoneNumber.trim()) {
+      alert('Phone Number is required.');
+      return;
+    }
+
+    const lastSubmission = localStorage.getItem('lastEnquiry');
+    if (lastSubmission) {
+      const { name, phone, time } = JSON.parse(lastSubmission);
+      const thirtyMinutes = 30 * 60 * 1000;
+      if (
+        name === this.enquiry.fullName.trim() &&
+        phone === this.enquiry.phoneNumber.trim() &&
+        Date.now() - time < thirtyMinutes
+      ) {
+        alert('You already submitted this enquiry within the last 30 minutes.');
+        return;
+      }
+    }
+
+    const payload = [
+      { Attribute: 'FirstName', Value: this.enquiry.fullName },
+      { Attribute: 'Phone', Value: this.enquiry.phoneNumber },
+      { Attribute: 'EmailAddress', Value: this.enquiry.emailId },
+      { Attribute: 'mx_Department', Value: this.getDepartmentName() },
+      { Attribute: 'Source', Value: 'Website - Enquiry Form From Speciality' }
+    ];
+
+    const accessKey = 'u$r56afea08b32d556818ad1a5f69f0e7f0';
+    const secretKey = '8d7f86d677dadaba209b4dead3cfcc4ab019031b';
+    const api_url_base = 'https://api-in21.leadsquared.com/v2/';
+    const url = `${api_url_base}LeadManagement.svc/Lead.Capture?accessKey=${accessKey}&secretKey=${secretKey}`;
+
+    this.http.post(url, payload, { headers: { 'Content-Type': 'application/json' } })
+      .subscribe({
+        next: (res) => {
+          console.log('LeadSquared Enquiry Success:', res);
+          alert('Your enquiry has been submitted successfully!');
+
+          localStorage.setItem('lastEnquiry', JSON.stringify({
+            name: this.enquiry.fullName.trim(),
+            phone: this.enquiry.phoneNumber.trim(),
+            time: Date.now()
+          }));
+
+          this.enquiry = { fullName: '', phoneNumber: '', emailId: '' };
+          this.router.navigate(['/thank-you']);
+        },
+        error: (err) => {
+          console.error('LeadSquared Error:', err);
+          alert('There was a problem submitting your enquiry.');
+        }
+      });
+  }
 }

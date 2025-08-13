@@ -1,6 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -40,6 +40,7 @@ import { FixedSurgeryDetailsComponent } from './fixed-surgery-details/fixed-surg
 import { OurEmpanelmentComponent } from './our-empanelment/our-empanelment.component';
 import { BlogDetailsDataComponent } from './blog-details-data/blog-details-data.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { PatientCareComponent } from './patient-care/patient-care.component';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -76,7 +77,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     ThankYouComponent,
     FixedSurgeryDetailsComponent,
     OurEmpanelmentComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    PatientCareComponent
   ],
   imports: [
     BrowserModule,
@@ -86,6 +88,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     HttpClientModule,
     CommonModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
     YouTubePlayerModule
   ],
   providers: [],
