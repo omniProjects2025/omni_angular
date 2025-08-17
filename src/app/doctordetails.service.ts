@@ -11,8 +11,9 @@ export class DoctordetailsService {
 
   constructor(private http: HttpClient) { }
 
-  getDoctors() {
-    return this.http.get(`${this.BASE_URL}/getdoctors`);
-  }
+getDoctors() {
+  return this.http.get(`${this.BASE_URL}/getdoctors`, { withCredentials: true });
+}
+
 
 }
