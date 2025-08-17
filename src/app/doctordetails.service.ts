@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 export class DoctordetailsService {
   // private BASE_URL = 'http://localhost:3000';
 
-      private BASE_URL = 'https://omniservicebackend.onrender.com';
+      private BASE_URL = 'https://omniservicebackend-vnyk.onrender.com';
 
   constructor(private http: HttpClient) { }
 
