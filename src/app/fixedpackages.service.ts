@@ -10,7 +10,8 @@ export class FixedpackagesService {
   private dataUrl = 'assets/json_data_files/data.json';
 
   // private BASE_URL = 'http://localhost:3000';
-  private BASE_URL = 'https://omniservicebackend.onrender.com';
+  // private BASE_URL = 'https://omniservicebackend.onrender.com';
+  private BASE_URL = 'https://omniservicebackend-vnyk.onrender.com';
 
 
   constructor(private http: HttpClient) { }
@@ -19,7 +20,7 @@ export class FixedpackagesService {
   }
 
   getAllHealthPackagesDetails() {
-    return this.http.get(`${this.BASE_URL}/getfixedsurgicalpackages`);
+    return this.http.get(`${this.BASE_URL}/getfixedsurgicalpackages`, { withCredentials: true });
   }
 
 

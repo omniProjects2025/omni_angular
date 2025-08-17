@@ -8,17 +8,20 @@ import { Observable } from 'rxjs';
 export class OurSpecialitiesService {
 
   //  private BASE_URL = 'http://localhost:3000'; 
-   private BASE_URL = 'https://omniservicebackend.onrender.com'; 
-  
-    constructor(private http: HttpClient) { }
-   
-  
-    // getAllSpecialities() {
-    //   return this.http.get(`${this.BASE_URL}/getspecialty`);
-    // }
+  //  private BASE_URL = 'https://omniservicebackend.onrender.com'; 
 
-    getAllSpecialities(): Observable<{ message: string, SpecialtyData: [] }> {
-  return this.http.get<{ message: string, SpecialtyData: [] }>(`${this.BASE_URL}/getspecialty`);
-}
+  private BASE_URL = 'https://omniservicebackend-vnyk.onrender.com';
+
+  constructor(private http: HttpClient) { }
+
+
+
+  // getAllSpecialities() {
+  //   return this.http.get(`${this.BASE_URL}/getspecialty`);
+  // }
+
+  getAllSpecialities(): Observable<{ message: string, SpecialtyData: [] }> {
+    return this.http.get<{ message: string, SpecialtyData: [] }>(`${this.BASE_URL}/getspecialty`, { withCredentials: true });
+  }
 
 }
