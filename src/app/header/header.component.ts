@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class HeaderComponent {
   activeSection = 'aboutOmni'; // Default
   hoveredItem: string | null = null;
+  mobileMenuOpen = false;
 
   direction_icon: boolean = false;
   depertment_icon: boolean = false;
@@ -71,20 +72,20 @@ export class HeaderComponent {
 
   infoItems = [
     {
-      icon: 'assets/icons/siron_icon.gif',
+      id: 1, icon: 'assets/icons/siron_icon.gif',
       title: '24/7 Emergency',
     },
     {
-      icon: 'assets/icons/book_an_appointment_nav.svg',
+      id: 2, icon: 'assets/icons/book_an_appointment_nav.svg',
       title: 'Book Appointment',
       route: '/book-an-appointment'
     },
     {
-      icon: 'assets/icons/call_bttn_nav.svg',
+      id: 3, icon: 'assets/icons/call_bttn_nav.svg',
       title: '888 0101 000',
     },
     {
-      icon: 'assets/icons/nabh_patient_safety_and_quality_of care_.svg',
+      id: 4, icon: 'assets/icons/nabh_patient_safety_and_quality_of care_.svg',
       title: ''
     }
   ];
@@ -192,5 +193,15 @@ export class HeaderComponent {
     this.hoveredItem = null;
     // this.router.navigate(['/about-us'], { queryParams: {sectionId: id} });
   }
+
+
+  toggleMobileMenu() {
+    this.mobileMenuOpen = !this.mobileMenuOpen;
+  }
+
+  closeMobileMenu() {
+    this.mobileMenuOpen = false;
+  }
+
 
 }

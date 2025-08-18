@@ -338,7 +338,7 @@ export class HomeComponent {
     }
   ]
 
-  owlInstance: any; // Store reference globally
+  owlInstance: any;
 
   locations_details = [
     {
@@ -465,7 +465,7 @@ export class HomeComponent {
     if (changes['activeIndex']) {
       if (this.activeIndex === 2 && !this.swiperInitialized) {
         setTimeout(() => {
-          this.initSwiper(true); // only reset once
+          this.initSwiper(true);
           this.swiperInitialized = true;
         }, 200);
       } else {
@@ -575,13 +575,7 @@ export class HomeComponent {
       }
     }).catch(error => console.error('Navigation error:', error));
   }
-  chunkArray(arr: any[], size: number) {
-    let chunkedArr = [];
-    for (let i = 0; i < arr.length; i += size) {
-      chunkedArr.push(arr.slice(i, i + size));
-    }
-    return chunkedArr;
-  }
+
   goToSlide(index: number) {
     this.currentIndex = index;
     $(this.owlCarousel.nativeElement).trigger('to.owl.carousel', [index, 300]);
@@ -590,8 +584,6 @@ export class HomeComponent {
   goToBlogSlide(index: number) {
     this.currentBlogIndex = index;
     $(this.blogCarousel.nativeElement).trigger('to.owl.carousel', [index, 300]);
-    // console.log('Current Blog Index:', this.currentBlogIndex);
-
   }
 
   prev() {
@@ -610,11 +602,11 @@ export class HomeComponent {
   updateSlidesPerView(): void {
     const screenWidth = window.innerWidth;
     if (screenWidth < 768) {
-      this.slidesPerView = 1; // Mobile view
+      this.slidesPerView = 1;
     } else if (screenWidth >= 768 && screenWidth < 1024) {
-      this.slidesPerView = 2; // Tablet view
+      this.slidesPerView = 2;
     } else {
-      this.slidesPerView = 4; // Desktop view
+      this.slidesPerView = 4;
     }
   }
 
@@ -647,12 +639,9 @@ export class HomeComponent {
     const swiperEl: any = this.swiperContainer?.nativeElement;
     if (swiperEl && swiperEl.swiper) {
       const swiper = swiperEl.swiper;
-
-      if (reset) swiper.slideTo(0, 0); // reset to first slide if needed
-
+      if (reset) swiper.slideTo(0, 0);
       this.updateArrowStates(swiper);
-
-      swiper.update(); // force refresh
+      swiper.update();
     }
   }
 
@@ -671,7 +660,7 @@ export class HomeComponent {
   updateArrowStates(swiper: any) {
     this.canSlidePrev = !swiper.isBeginning;
     this.canSlideNext = !swiper.isEnd;
-    this.cdr.detectChanges(); // ensure Angular updates the UI
+    this.cdr.detectChanges();
   }
 
   bannerImagesSlides() {
@@ -700,7 +689,7 @@ export class HomeComponent {
       margin: 20,
       nav: false,
       dots: false,
-      autoplay: true,
+      autoplay: false,
       autoplayTimeout: 3000,
       autoplayHoverPause: true,
       responsive: {
@@ -713,13 +702,13 @@ export class HomeComponent {
 
 
   testowl() {
-    const owl = $(this.patientowlCarousel.nativeElement); // ✅ Fix: Use `const`
+    const owl = $(this.patientowlCarousel.nativeElement);
     $(this.patientowlCarousel.nativeElement).owlCarousel({
       loop: true,
       margin: 20,
       nav: false,
-      dots: false, // Disable Owl default dots
-      autoplay: true,
+      dots: false,
+      autoplay: false,
       autoplayTimeout: 3000,
       autoplayHoverPause: true,
       responsive: {
@@ -738,7 +727,7 @@ export class HomeComponent {
       loop: true,
       margin: 15,
       nav: false,
-      dots: false, // Custom dots
+      dots: false,
       autoplay: true,
       autoplayTimeout: 3000,
       autoplayHoverPause: true,
@@ -803,19 +792,13 @@ export class HomeComponent {
 
 
   toggleFaq(index: number) {
-    // If only one open at a time, use this logic:
     this.faqs.forEach((faq, i) => faq.expanded = i === index ? !faq.expanded : false);
-
-    // If you want to allow multiple open at once, just toggle one:
-    // this.faqs[index].expanded = !this.faqs[index].expanded;
   }
 
   onSubmit(form: any) {
     if (form.valid) {
       console.log('Form Submitted:', this.formData);
-      // Perform your submit logic here
     } else {
-      // Mark all controls as touched to show errors
       Object.keys(form.controls).forEach(field => {
         form.controls[field].markAsTouched();
       });

@@ -2,51 +2,57 @@
 <header class="container-fluid p-0 position-relative bg-white">
   <div class="owl-carousel banner-slider owl-theme position-relative m-0" style="margin: 0px !important;">
     <div class="banner-item position-relative">
-      <img src="assets/images/Not Sure About Surgery-01.jpg" class="w-100" alt="Banner 1">
+      <img src="assets/images/Not Sure About Surgery-01.jpg" class="w-100 d-none d-md-block" alt="Banner 1">
+            <img src="assets/images/not_sure_about_surgery_mobile.jpg" class="d-block d-md-none" alt="Banner 1">
     </div>
     <div class="banner-item position-relative">
-      <img src="assets/images/ambulance_banner_white.jpg" class=" img-fluid" alt="Banner 2">
+      <img src="assets/images/ambulance_banner_white.jpg" class=" img-fluid d-none d-md-block" alt="Banner 2">
+            <img src="assets/images/ambulance_banner_white_mobile.jpg" class="d-block d-md-none" alt="Banner 2">
     </div>
-        <div class="banner-item position-relative">
-      <img src="assets/images/best_multispeciality.jpg" class=" img-fluid" alt="Banner 2">
+    <div class="banner-item position-relative">
+      <img src="assets/images/best_multispeciality.jpg" class="img-fluid d-none d-md-block" alt="Banner Desktop" />
+      <img src="assets/images/best_multispeciality_mobile.jpg" class="d-block d-md-none"
+        alt="Banner Mobile" />
     </div>
+
   </div>
 </header>
 
 
 <!-- section two strips code starts from here -->
-<section class="text-center pt-4" style="background-color: white;">
+<section class="text-center pt-4 bg-white">
   <ng-container>
-    <div class="row g-2 location_section d-flex justify-content-center gap-3">
-      <div class="col-md-2 col-12 col-sm-12 width_height" data-bs-toggle="modal" data-bs-target="#locationModal"
-        style="cursor: pointer;">
-        <img class="img-fluid" src="assets/icons/our_locations.svg" alt="" width="130" height="">
-      </div>
-      <div class="col-md-2 col-12 col-sm-12 width_height " data-bs-toggle="modal" data-bs-target="#appointmentModal"
-        style="cursor: pointer;">
-        <img class="img-fluid" src="assets/icons/book_an_appointment_new_home_logo.svg" alt="" width="130" height="">
-      </div>
-      <div class="col-md-2 col-12 col-sm-12 rounded width_height" (click)="openSecondOpinion()"
-        style="cursor: pointer;">
-        <img class="img-fluid" src="assets/icons/Images_Second_Opinion.svg" alt="" width="130" height="">
-      </div>
-      <div class="col-md-2 col-12 col-sm-12 rounded width_height" (click)="healthCheckup()" style="cursor: pointer;">
-        <img class="img-fluid" src="assets/icons/Images_Health_Checkup.svg" alt="" width="130" height="">
-      </div>
-      <div class="col-md-2 col-12 col-sm-12 rounded width_height" (click)="goToFixedSurgical()"
-        style="cursor: pointer;">
-        <img class="img-fluid" src="assets/icons/Images_Fixed_Surgical_Packges.svg" alt="" width="130" height="">
+    <div class="container">
+      <div class="row g-3 justify-content-center">
+        <div class="col-6 col-md-2" data-bs-toggle="modal" data-bs-target="#locationModal" style="cursor: pointer;">
+          <img class="img-fluid rounded shadow-sm" src="assets/icons/our_locations.svg" alt="Locations" />
+        </div>
+        <div class="col-6 col-md-2" data-bs-toggle="modal" data-bs-target="#appointmentModal" style="cursor: pointer;">
+          <img class="img-fluid rounded shadow-sm" src="assets/icons/book_an_appointment_new_home_logo.svg"
+            alt="Appointment" />
+        </div>
+        <div class="col-6 col-md-2" (click)="openSecondOpinion()" style="cursor: pointer;">
+          <img class="img-fluid rounded shadow-sm" src="assets/icons/Images_Second_Opinion.svg" alt="Second Opinion" />
+        </div>
+        <div class="col-6 col-md-2" (click)="healthCheckup()" style="cursor: pointer;">
+          <img class="img-fluid rounded shadow-sm" src="assets/icons/Images_Health_Checkup.svg" alt="Health Checkup" />
+        </div>
+        <div class="col-6 col-md-2" (click)="goToFixedSurgical()" style="cursor: pointer;">
+          <img class="img-fluid rounded shadow-sm" src="assets/icons/Images_Fixed_Surgical_Packges.svg"
+            alt="Surgical Packages" />
+        </div>
       </div>
     </div>
   </ng-container>
-  <div class="d-flex speciality-container px-2 justify-content-center mt-4"
-    style="overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch;">
-    <div *ngFor="let spe of specialities; index as i" (click)="ourSpecialities(i)"
-      class="speciality-item px-3 py-2 flex-shrink-0" [ngClass]="i === activeIndex ? 'active' : 'text_gray'">
-      <span>{{ spe.spe_name }}</span>
-    </div>
-  </div>
 </section>
+
+<div class="d-flex speciality-container px-2 justify-content-center mt-4"
+  style="overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch;">
+  <div *ngFor="let spe of specialities; index as i" (click)="ourSpecialities(i)"
+    class="speciality-item px-3 py-2 flex-shrink-0" [ngClass]="i === activeIndex ? 'active' : 'text_gray'">
+    <span>{{ spe.spe_name }}</span>
+  </div>
+</div>
 
 <section class="bg_lgt_blue">
   <!--************** Start Form Here OUR SPECIALITIES -->
@@ -116,12 +122,12 @@
   <!-- Technologies code end here -->
 </section>
 <!-- WHY CHOOSE OMNI SECTION -->
-<div class="why-choose-container my-5 mx-4 p-4 rounded-4">
+<div class="why-choose-container my-5 mx-md-4 p-md-4 mx-lg-4 p-lg-4 rounded-4">
   <div class="row g-4 align-items-center px-lg-4 px-2">
     <!-- Left Image -->
     <div class="col-lg-5 text-center text-lg-start">
       <img src="assets/images/why_choosi_omni.jpg" alt="Why Choose Omni Hospitals"
-        class="img-fluid rounded-5 w-100 h-100 object-fit-cover" style="max-height: 400px;">
+        class="img-fluid rounded-md-5 rounded-lg-5 w-100 h-100 object-fit-cover" style="max-height: 400px;">
     </div>
 
     <!-- Right Content -->
@@ -322,56 +328,75 @@
 
 
 
-  <!-- contact-form.component.html -->
-  <div class="py-5 px-3 px-md-5">
-    <div class="row">
-      <h5 class="fw-bold mb-3 text-center">Have Questions Or Need Assistance?</h5>
-      <!-- Left Text -->
-      <!-- <div class="col-md-2 text-end"> -->
-      <h2 class=" col-md-2 fw-bold lh-sm m-0 fs-4">WE'RE HERE FOR YOU, ANYTIME!</h2>
-      <!-- </div> -->
+<!-- contact-form.component.html -->
+<div class="py-5 px-3 px-md-5">
+  <div class="row">
+    <h5 class="fw-bold mb-3 text-center">Have Questions Or Need Assistance?</h5>
 
-      <!-- Form Section -->
-      <div class="col-md-10">
-        <form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)"
-          class="d-flex flex-column gap-2 flex-wrap flex-md-nowrap">
-          <div class="d-flex w-100 gap-3">
-            <!-- Name Field -->
-            <div>
-              <input type="text" class="form-control" name="name" placeholder="Name*"
-                style="width: 300px; height: 42px; border: 1px solid #0B99CE;" [(ngModel)]="formData.name" required
-                #name="ngModel">
-              <div *ngIf="name.invalid && name.touched" class="text-danger mt-1">Name is required</div>
-            </div>
+    <!-- Left Text -->
+    <h2 class="col-md-2 fw-bold lh-sm m-0 fs-4 text-center text-md-start">
+      WE'RE HERE FOR YOU, ANYTIME!
+    </h2>
 
-            <!-- Phone Field -->
-            <div>
-              <input type="text" class="form-control" name="phone" placeholder="Phone Number*"
-                style="width: 300px; height: 42px; border: 1px solid #0B99CE;" [(ngModel)]="formData.phone" required
-                #phone="ngModel">
-              <div *ngIf="phone.invalid && phone.touched" class="text-danger mt-1">Phone number is required</div>
-            </div>
+    <div class="col-md-10">
+      <form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)" class="row g-3">
 
-            <!-- Email Field -->
-            <div>
-              <input type="email" class="form-control" name="email" placeholder="Email"
-                style="width: 300px; height: 42px; border: 1px solid #0B99CE;" [(ngModel)]="formData.email" email
-                #email="ngModel">
-              <div *ngIf="email.invalid && email.touched" class="text-danger mt-1">Enter a valid email</div>
-            </div>
-
+        <!-- Name Field -->
+        <div class="col-12 col-md-4">
+          <input type="text"
+                 class="form-control"
+                 name="name"
+                 placeholder="Name*"
+                 [(ngModel)]="formData.name"
+                 required
+                 #name="ngModel">
+          <div *ngIf="name.invalid && name.touched" class="text-danger mt-1">
+            Name is required
           </div>
+        </div>
 
-
-          <!-- Submit button moved inside form -->
-          <div class="w-100">
-            <button type="submit" class="btn px-5 py-1 text-center mt-3"
-              style="white-space: nowrap; background-color: #0291D5; color: white;">Submit</button>
+        <!-- Phone Field -->
+        <div class="col-12 col-md-4">
+          <input type="text"
+                 class="form-control"
+                 name="phone"
+                 placeholder="Phone Number*"
+                 [(ngModel)]="formData.phone"
+                 required
+                 #phone="ngModel">
+          <div *ngIf="phone.invalid && phone.touched" class="text-danger mt-1">
+            Phone number is required
           </div>
-        </form>
-      </div>
+        </div>
+
+        <!-- Email Field -->
+        <div class="col-12 col-md-4">
+          <input type="email"
+                 class="form-control"
+                 name="email"
+                 placeholder="Email"
+                 [(ngModel)]="formData.email"
+                 email
+                 #email="ngModel">
+          <div *ngIf="email.invalid && email.touched" class="text-danger mt-1">
+            Enter a valid email
+          </div>
+        </div>
+
+        <!-- Submit button -->
+        <div class="col-12 text-center text-md-start">
+          <button type="submit"
+                  class="btn px-5 py-2 mt-3"
+                  style="background-color: #0291D5; color: white;">
+            Submit
+          </button>
+        </div>
+
+      </form>
     </div>
   </div>
+</div>
+
 
 </div>
 

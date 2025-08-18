@@ -285,6 +285,11 @@
     width: 51px;
     height: 51px;
   }
+    .nhbl_icon {
+    width: 45px;
+    height: 45px;
+  }
+
 
   .mobile-info-grid {
     display: grid;
@@ -382,49 +387,68 @@
   letter-spacing: 1px;
   padding: 15px 5px;
 }
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='black' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+/* Mobile Icons + Logo Row */
+.mobile-info-grid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
-/******** Side fixed buttons css end *********************/
+.icons-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  max-width: calc(100% - 120px); /* leaves space for logo + hamburger */
+}
 
+.hamburger-container {
+  flex: 0 0 auto;
+  z-index: 10;
+}
 
-/* .mega-specialities-dropdown {
-  width: 900px;
-  left: 0;
-  top: 100%;
-  position: absolute;
-  background: #fff;
-  border-radius: 0 0 8px 8px;
-  box-shadow: 0 8px 32px rgba(40,60,102,.08);
-  z-index: 200;
+.hamburger-btn {
+  background: none;
+  border: none;
+  font-size: 28px;
+}
+
+/* Mobile Slide Menu */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 80%;
+  max-width: 300px;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: -4px 0 8px rgba(0,0,0,0.2);
+  transition: right 0.3s ease-in-out;
+  z-index: 1050;
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+.mobile-menu.open {
+  right: 0;
+}
+
+/* Menu links */
+.mobile-menu .nav-link {
   display: block;
-  padding: 0;
+  padding: 12px 0;
+  font-weight: 500;
+  color: #000;
+  text-decoration: none;
 }
-.mega-specialities-dropdown .dropdown-item {
-  font-size: 15px;
-  color: #222;
-  padding: 8px 10px;
-  border-radius: 3px;
-  transition: background 0.07s, color 0.07s;
+
+/* Submenu links */
+.mobile-menu .submenu a {
+  padding-left: 15px;
+  font-size: 14px;
+  display: block;
 }
-.mega-specialities-dropdown .dropdown-item:hover {
-  background: #f3f3ff;
-  color: #f47b1b;
-  font-weight: 600;
-}
-.mega-specialities-dropdown ul {
-  list-style: none;
-  padding-left: 0;
-}
-.mega-specialities-dropdown .col-md-3 {
-  margin-bottom: 0.5rem;
-}
-@media (max-width: 991px) {
-  .mega-specialities-dropdown {
-    width: 100vw;
-    left: -24px;
-    right: 0;
-  }
-  .mega-specialities-dropdown .col-md-3 {
-    min-width: 40vw;
-    max-width: 50vw;
-  }
-} */
+
