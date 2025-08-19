@@ -1,16 +1,19 @@
 <app-header></app-header>
 <section class="bg_lgt_blue">
   <section class="banner">
-    <img src="assets/images/careers_at_omni.jpg" alt="Omni Banner" class="img-fluid w-100"
+    <img src="assets/images/careers_at_omni.jpg" alt="Omni Banner" class="img-fluid w-100 d-none d-md-block"
+      style="object-fit: cover;">
+    <img src="assets/images/careers_at_omni_mobile.jpg" alt="Omni Banner" class="img-fluid w-100 d-block d-md-none"
       style="object-fit: cover;">
   </section>
 
 
-  <section class="discover py-5 text-center">
-    <h2 class="position-relative d-inline-block px-3"><img class="me-1" src="assets/health_checkup/dots_left.svg"
+  <section class="discover py-3 text-center">
+    <h2 class="position-relative d-inline-block"><img class="me-1" src="assets/health_checkup/dots_left.svg"
         alt="">Join a Team That Cares Professionally and Personally<img class="ms-1"
         src="assets/health_checkup/dots_right.svg" alt=""></h2>
-    <p class="px-5" style="text-align: justify;">As one of the leading multispeciality hospitals, we offer a supportive and progressive work
+    <p class="px-3" style="text-align: justify;">As one of the leading multispeciality hospitals, we offer a supportive
+      and progressive work
       environment where every team member can thrive. Whether you’re beginning your journey in healthcare or looking to
       advance your skills, we provide the tools, training, and encouragement you need to grow both professionally and
       personally.</p>
@@ -90,7 +93,7 @@
 
   <!-- Joiners -->
   <section class="container">
-    <div *ngIf="currentTab === 'joiners'" class="px-5">
+    <div *ngIf="currentTab === 'joiners'" class="">
       <h5 style="font-size:30px; font-weight: 800;">Doctors Joiners</h5>
       <p style="font-weight:300; font-size:15px">We welcome dedicated and skilled medical professionals who are
         passionate about delivering excellence in patient care.

@@ -1,12 +1,13 @@
 <app-header></app-header>
 <section class="bg_white">
   <div class="banner-image">
-    <img src="assets/images/get_touch_with_us.jpg" alt="Banner Image">
+    <img src="assets/images/get_touch_with_us.jpg" alt="Banner Image" class="d-none d-md-block">
+    <img src="assets/images/get_touch_with_us_mobile.jpg" alt="Banner Image" class="d-block d-md-none">
   </div>
-  <div class="container-fluid">
+  <div class="">
     <div class="contact-container">
-      <h2><span class="blue">Get In Touch</span> <span class="green"> With Us</span></h2>
-      <p class="description">
+      <h2 class="pt-2"><span class="blue">Get In Touch</span> <span class="green"> With Us</span></h2>
+      <p class="description mx-2">
         We’re here to support you every step of the way in your healthcare journey. Whether you need to book an
         appointment, explore our range of medical services, check insurance-related information, or provide feedback,
         our dedicated team is always ready to assist you. At OMNI Hospitals, we believe that prompt communication and
@@ -84,11 +85,11 @@
     </div>
 
     <!-- contact.component.html -->
-    <div class="container pb-5">
+    <div class="pb-5">
       <div class="row">
         <div class="col-md-6">
           <!-- Cards -->
-          <div class="card mb-3" *ngFor="let location of filteredBranches"
+          <div class="card mb-3 mx-2" *ngFor="let location of filteredBranches"
             style="border-radius: 10px; border: 2px solid rgba(130, 130, 130, 1);">
             <div class="card-body py-2 px-3">
               <div class="row g-2">
